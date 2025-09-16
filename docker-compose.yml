@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: smart_city_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./database/init:/docker-entrypoint-initdb.d
+    environment:
+      MONGO_INITDB_DATABASE: smart_city
+    networks:
+      - smart_city_network
+
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: smart_city_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongodb:27017/smart_city
+      - PORT=5000
+    depends_on:
+      - mongodb
+    networks:
+      - smart_city_network
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: smart_city_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - smart_city_network
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+
+volumes:
+  mongodb_data:
+
+networks:
+  smart_city_network:
+    driver: bridge

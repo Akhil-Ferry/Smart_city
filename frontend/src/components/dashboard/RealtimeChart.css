@@ -1,0 +1,272 @@
+/* Realtime Chart Styles */
+.realtime-chart {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.chart-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.chart-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.metric-selector,
+.time-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metric-selector label,
+.time-selector label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.control-select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.control-select:hover {
+  border-color: #9ca3af;
+}
+
+.control-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.chart-container {
+  flex: 1;
+  position: relative;
+  height: 300px;
+  min-height: 250px;
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 16px;
+  transition: opacity 0.3s;
+}
+
+.chart-container.loading {
+  opacity: 0.6;
+}
+
+.chart-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #6b7280;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+.chart-loading p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.current-value {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.value-display {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.value-label {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.value-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.value-unit {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+.value-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-indicator.good {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-indicator.moderate {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-indicator.poor {
+  background: #fecaca;
+  color: #991b1b;
+}
+
+.status-indicator.critical {
+  background: #fde2e8;
+  color: #991b1b;
+  animation: pulse 2s infinite;
+}
+
+.status-indicator.low {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-indicator.normal {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-indicator.high {
+  background: #fed7d7;
+  color: #c53030;
+}
+
+.status-icon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .chart-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .chart-controls {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+  
+  .metric-selector,
+  .time-selector {
+    flex: 1;
+  }
+  
+  .control-select {
+    width: 100%;
+    min-width: 0;
+  }
+  
+  .chart-container {
+    height: 250px;
+    padding: 12px;
+  }
+  
+  .current-value {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .value-display {
+    justify-content: center;
+  }
+  
+  .value-status {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-header h2 {
+    font-size: 18px;
+  }
+  
+  .chart-controls {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .metric-selector,
+  .time-selector {
+    width: 100%;
+  }
+  
+  .value-number {
+    font-size: 20px;
+  }
+}
